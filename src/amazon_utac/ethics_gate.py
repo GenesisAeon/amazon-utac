@@ -15,7 +15,7 @@ full ethical review but catches the most common failure modes.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 
 @dataclass
@@ -90,7 +90,7 @@ class EthicsCheckResult:
     reason: str
     warnings: list[str] = field(default_factory=list)
     timestamp: str = field(
-        default_factory=lambda: datetime.now(timezone.utc).isoformat()
+        default_factory=lambda: datetime.now(UTC).isoformat()
     )
 
 
@@ -101,7 +101,11 @@ class EthicsGate:
     Usage (as specified in the GenesisAeon contract):
 
         # Ethics-Gate Light (Phase H)
-        tension = self._tension_metric.get_current_tension() if hasattr(self, '_tension_metric') else 0.0
+        tension = (
+            self._tension_metric.get_current_tension()
+            if hasattr(self, "_tension_metric")
+            else 0.0
+        )
         ethics_result = self._ethics_gate.check(state=state, tension=tension)
         if not ethics_result["allowed"]:
             raise RuntimeError(f"EthicsGate blocked: {ethics_result['reason']}")
@@ -181,30 +185,34 @@ class EthicsGate:
 
         # Check 4: tipping year bounds (if present)
         tipping_year = state.get("tipping_year")
-        if tipping_year is not None:
-            if not (cfg.min_tipping_year <= tipping_year <= cfg.max_tipping_year):
-                return {
-                    "allowed": False,
-                    "reason": (
-                        f"Predicted tipping year {tipping_year:.0f} outside "
-                        f"responsible range [{cfg.min_tipping_year:.0f}, "
-                        f"{cfg.max_tipping_year:.0f}]. "
-                        "Prediction is not scientifically defensible."
-                    ),
-                    "warnings": warnings,
-                }
+        if tipping_year is not None and not (
+            cfg.min_tipping_year <= tipping_year <= cfg.max_tipping_year
+        ):
+            return {
+                "allowed": False,
+                "reason": (
+                    f"Predicted tipping year {tipping_year:.0f} outside "
+                    f"responsible range [{cfg.min_tipping_year:.0f}, "
+                    f"{cfg.max_tipping_year:.0f}]. "
+                    "Prediction is not scientifically defensible."
+                ),
+                "warnings": warnings,
+            }
 
         # Check 5: uncertainty bounds required for zenodo records
-        if cfg.require_uncertainty_bounds and state.get("is_zenodo_record", False):
-            if "uncertainty_bounds" not in state:
-                return {
-                    "allowed": False,
-                    "reason": (
-                        "Zenodo record requires uncertainty bounds. "
-                        "Provide 'uncertainty_bounds' in the state dict."
-                    ),
-                    "warnings": warnings,
-                }
+        if (
+            cfg.require_uncertainty_bounds
+            and state.get("is_zenodo_record", False)
+            and "uncertainty_bounds" not in state
+        ):
+            return {
+                "allowed": False,
+                "reason": (
+                    "Zenodo record requires uncertainty bounds. "
+                    "Provide 'uncertainty_bounds' in the state dict."
+                ),
+                "warnings": warnings,
+            }
 
         # Gamma advisory warnings
         if gamma < 0.05:
@@ -218,7 +226,11 @@ class EthicsGate:
                 "Verify calibration against observational data."
             )
 
-        return {"allowed": True, "reason": "All Ethics-Gate Light checks passed.", "warnings": warnings}
+        return {
+            "allowed": True,
+            "reason": "All Ethics-Gate Light checks passed.",
+            "warnings": warnings,
+        }
 
     def zenodo_disclaimer(self) -> str:
         """Return the standard GenesisAeon scientific disclaimer for records."""

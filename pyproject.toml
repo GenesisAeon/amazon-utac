@@ -5,7 +5,7 @@ description = "Universal Python project scaffold - generate professional project
 readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "GenesisAeon / MOR Research Collective" }]
-requires-python = ">=3.11"
+requires-python = ">=3.10"
 keywords = ["scaffold", "template", "cli", "project-generator", "skeleton", "amazon", "utac", "crep", "tipping-point"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -65,7 +65,7 @@ packages = ["src/diamond_setup", "src/amazon_utac"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py311"
+target-version = "py310"
 
 [tool.ruff.lint]
 select = ["E", "F", "B", "I", "W", "UP", "C4", "SIM"]

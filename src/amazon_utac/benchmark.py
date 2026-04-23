@@ -9,15 +9,10 @@ Primary references:
 
 from __future__ import annotations
 
-import math
-
-import numpy as np
-
 from .constants import (
     AMAZON_TARGETS,
     CURRENT_DEFORESTATION_FRACTION,
     DRY_SEASON_LENGTHENING_WEEKS,
-    ETA_AMAZON,
     GAMMA_AMAZON,
 )
 
@@ -201,5 +196,7 @@ def validate_gamma_spectrum(gamma_dict: dict[str, float]) -> dict[str, object]:
         "spectrum": actual_values,
         "is_monotonic": is_monotonic,
         "amazon_gamma": GAMMA_AMAZON,
-        "cross_domain_universality": abs(actual_values["amoc_ocean"] - actual_values["neural_brain"]) < 0.01,
+        "cross_domain_universality": (
+            abs(actual_values["amoc_ocean"] - actual_values["neural_brain"]) < 0.01
+        ),
     }
