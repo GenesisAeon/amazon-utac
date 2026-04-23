@@ -6,11 +6,8 @@ import numpy as np
 
 from .constants import (
     ANNUAL_DEFORESTATION_RATE,
-    CURRENT_FOREST_FRACTION,
     K_FOREST,
-    PRODES_DEFORESTED_2024_KM2,
     PRODES_ORIGINAL_AREA_KM2,
-    PRODES_REFERENCE_YEAR,
     SEED,
 )
 

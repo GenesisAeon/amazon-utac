@@ -148,7 +148,7 @@ class DualAttractorLandscape:
 
     def is_in_forest_basin(self, H: float, gamma: float) -> bool:
         """True if H is in the forest attraction basin at this Γ."""
-        return H > self.effective_saddle(gamma)
+        return self.effective_saddle(gamma) < H
 
     def barrier_height(self, gamma: float) -> float:
         """

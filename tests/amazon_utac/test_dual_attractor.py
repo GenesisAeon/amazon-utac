@@ -5,14 +5,12 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from amazon_utac.savanna_attractor import DualAttractorLandscape
-from amazon_utac.crep_amazon import AmazonCREP
 from amazon_utac.constants import (
     GAMMA_AMAZON,
-    H_FOREST_ATTRACTOR,
     H_SADDLE,
-    H_SAVANNA_ATTRACTOR,
 )
+from amazon_utac.crep_amazon import AmazonCREP
+from amazon_utac.savanna_attractor import DualAttractorLandscape
 
 
 @pytest.fixture
@@ -114,7 +112,7 @@ class TestAmazonCREP:
 
     def test_component_E_zero_at_zero(self, crep: AmazonCREP) -> None:
         E = crep.component_E(0.0, 0.0)
-        assert E == pytest.approx(0.0, abs=1e-6)
+        assert pytest.approx(0.0, abs=1e-6) == E
 
     def test_component_E_increases(self, crep: AmazonCREP) -> None:
         E1 = crep.component_E(0.1, 0.5)

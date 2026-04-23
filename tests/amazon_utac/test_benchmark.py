@@ -11,7 +11,7 @@ from amazon_utac.benchmark import (
     validate_gamma_spectrum,
 )
 from amazon_utac.constants import AMAZON_TARGETS, GAMMA_AMAZON
-from amazon_utac.ethics_gate import EthicsGate, EthicsGateConfig, TensionMetric
+from amazon_utac.ethics_gate import EthicsGate, TensionMetric
 
 
 class TestBenchmarks:

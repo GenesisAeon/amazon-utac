@@ -4,7 +4,7 @@ from __future__ import annotations
 
 import pytest
 
-from amazon_utac import AmazonUTAC, GAMMA_AMAZON
+from amazon_utac import GAMMA_AMAZON, AmazonUTAC
 from amazon_utac.constants import (
     CREP_SIGMA,
     ETA_AMAZON,
@@ -183,7 +183,7 @@ class TestCalibration:
         assert abs(GAMMA_AMAZON - 0.116) < 0.005
 
     def test_eta_amazon_is_025(self) -> None:
-        assert ETA_AMAZON == pytest.approx(0.25)
+        assert pytest.approx(0.25) == ETA_AMAZON
 
     def test_gamma_lower_than_amoc(self) -> None:
         """Amazon (Γ ≈ 0.116) must be lower than AMOC (Γ ≈ 0.251)."""

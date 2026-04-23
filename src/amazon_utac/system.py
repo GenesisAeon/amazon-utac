@@ -23,18 +23,14 @@ Ethics-Gate Light (Phase H) runs inside run_cycle() and to_zenodo_record().
 
 from __future__ import annotations
 
-import math
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
 import numpy as np
 
 # ── genesis-os imports (stub if not installed) ───────────────────────────────
 try:
-    from genesis.core.utac import UTAC_ODE, UTACParams  # type: ignore[import]
-    from genesis.core.crep import CREPTensor  # type: ignore[import]
-    from genesis.mirror.phase_loop import PhaseTransitionLoop  # type: ignore[import]
-    from genesis.core.lagrangian import UnifiedLagrangian  # type: ignore[import]
+    import genesis  # type: ignore[import]  # noqa: F401
 
     GENESIS_AVAILABLE = True
 except ImportError:
@@ -53,11 +49,9 @@ from .constants import (
     CURRENT_DEFORESTATION_FRACTION,
     GAMMA_AMAZON,
     H_FOREST_ATTRACTOR,
-    H_SADDLE,
     H_SAVANNA_ATTRACTOR,
     H_TIPPING_LOW,
     PACKAGE_REGISTRY_ENTRY,
-    R_FOREST,
     SEED,
 )
 from .crep_amazon import AmazonCREP
@@ -139,7 +133,6 @@ class AmazonUTAC:
 
         # Initial conditions
         H0 = self._forest.current_cover()
-        gamma_0 = GAMMA_AMAZON
 
         years_hist = self._forest.years
         cover_hist = self._forest.cover
@@ -320,7 +313,7 @@ class AmazonUTAC:
                     "10.1126/sciadv.aba2949",  # Lovejoy & Nobre 2019
                     "10.1038/s41558-022-01287-8",  # Boulton et al. 2022
                 ],
-                "created": datetime.now(timezone.utc).isoformat(),
+                "created": datetime.now(UTC).isoformat(),
             },
             "crep_state": crep,
             "utac_state": utac,

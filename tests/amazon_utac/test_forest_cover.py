@@ -5,13 +5,11 @@ from __future__ import annotations
 import numpy as np
 import pytest
 
-from amazon_utac.forest_cover import ForestCoverLoader
-from amazon_utac.deforestation import ProdesDeforestation
 from amazon_utac.constants import (
-    ANNUAL_DEFORESTATION_RATE,
-    CURRENT_DEFORESTATION_FRACTION,
     K_FOREST,
 )
+from amazon_utac.deforestation import ProdesDeforestation
+from amazon_utac.forest_cover import ForestCoverLoader
 
 
 class TestForestCoverLoader:

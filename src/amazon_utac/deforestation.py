@@ -12,7 +12,6 @@ from .constants import (
     SEED,
 )
 
-
 # Historical PRODES-derived rates (km²/yr), selected key years
 # Source: INPE PRODES, publicly available annual reports
 _PRODES_HISTORICAL: dict[int, float] = {
