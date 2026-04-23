@@ -1,0 +1,97 @@
+# Lovejoy & Nobre (2019) Tipping Point Targets
+# Source: Science Advances 5(12), eaba2949 (2019)
+# DOI: 10.1126/sciadv.aba2949
+
+metadata:
+  reference: "Lovejoy, T.E. & Nobre, C. (2019)"
+  title: "Amazon tipping point: Last chance for action"
+  journal: "Science Advances"
+  doi: "10.1126/sciadv.aba2949"
+  authors:
+    - "Thomas E. Lovejoy (George Mason University)"
+    - "Carlos A. Nobre (University of São Paulo)"
+
+core_finding:
+  description: >
+    The Amazon rainforest is approaching a tipping point between
+    17-25% deforestation, beyond which irreversible savannisation
+    becomes likely. The interaction of deforestation, fire, and
+    climate change makes this threshold dynamic and non-linear.
+  tipping_threshold_low_pct: 20
+  tipping_threshold_high_pct: 25
+  tipping_threshold_midpoint_pct: 22.5
+  note: "Threshold depends on synergistic effects of deforestation + drought + fire"
+
+mechanisms:
+  moisture_recycling_disruption:
+    description: >
+      The Amazon generates its own rainfall through moisture recycling
+      (30-50% of basin rainfall is recycled evapotranspiration).
+      Deforestation reduces evapotranspiration → reduced rainfall →
+      longer dry seasons → more fire → more deforestation (positive feedback).
+    utac_mapping: "CREP R-component (resonance)"
+
+  forest_dieback_feedback:
+    description: >
+      As forest cover declines, remaining forest is more vulnerable to
+      drought and fire. The self-amplifying feedback accelerates collapse.
+    utac_mapping: "Double-well ODE saddle-point shift"
+
+  climate_change_interaction:
+    description: >
+      Global warming reduces precipitation and increases drought frequency,
+      lowering the deforestation threshold over time.
+    utac_mapping: "Γ_degrade increases with global temperature anomaly"
+
+current_state_2019:
+  deforestation_pct_at_publication: 17
+  note: "As of 2019; updated to ~16% deforested (2024 with reforestation)"
+
+utac_benchmark_targets:
+  deforestation_threshold_pct:
+    target: 22.5
+    tolerance_rel: 0.10
+    units: "percent of original Amazon area"
+    source: "midpoint of Lovejoy & Nobre 2019 range (20-25%)"
+
+  current_deforestation_pct:
+    target: 16.0
+    tolerance_rel: 0.10
+    units: "percent of original Amazon area"
+    source: "INPE PRODES 2024 estimate"
+
+  gamma_amazon:
+    target: 0.116
+    tolerance_rel: 0.05
+    derivation: "arctanh(0.25) / 2.2 where η = 1 - H_threshold"
+    units: "dimensionless CREP Gamma"
+
+  dry_season_lengthening_weeks:
+    target: 4.5
+    tolerance_rel: 0.20
+    units: "weeks of additional dry season since 1979"
+    source: "Synthesis of TRMM/GPM observations"
+
+  resilience_loss_ar1_trend:
+    target: "increasing"
+    source: "Boulton et al. 2022"
+
+genesisaeon_prediction:
+  description: >
+    UTAC falsifiable prediction: If annual deforestation rate stays at
+    ~1% of remaining forest, H crosses the tipping threshold in 2038 ± 5 years.
+  central_year: 2038
+  uncertainty_years: 5
+  testable_against: ["PRODES", "MODIS MOD44B", "CMIP7 Amazon projections"]
+
+  crep_spectrum_position:
+    gamma_amazon: 0.116
+    interpretation: >
+      Amazon operates in LOW-CREP zone (Γ ≈ 0.116).
+      More vulnerable per unit forcing than AMOC (Γ ≈ 0.251).
+      40% deforestation scenario would push Γ → 0.189, entering the
+      Mirror-Machine irreversibility detection zone.
+
+citation: |
+  Lovejoy, T.E. & Nobre, C.A. Amazon tipping point: Last chance for action.
+  Sci. Adv. 5, eaba2949 (2019). https://doi.org/10.1126/sciadv.aba2949

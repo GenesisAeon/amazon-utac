@@ -1,0 +1,58 @@
+cff-version: 1.2.0
+message: >
+  If you use this software in your research, please cite it using the metadata below.
+title: "amazon-utac: Amazon Rainforest Savannisation Threshold UTAC Model"
+abstract: >
+  GenesisAeon Package 19. Models the Amazon rainforest → savanna tipping
+  transition as a UTAC dynamical system with a double-well potential landscape.
+  Implements the CREP tensor (C, R, E, P) calibrated against Lovejoy & Nobre
+  (2019) and Boulton et al. (2022). Central result: Γ_Amazon ≈ 0.116 (LOW-CREP
+  zone). Includes Ethics-Gate Light (Phase H) for responsible scientific output.
+version: "0.1.0"
+date-released: "2026-04-23"
+license: MIT
+repository-code: "https://github.com/GenesisAeon/amazon-utac"
+doi: "10.5281/zenodo.19645351"
+keywords:
+  - amazon
+  - deforestation
+  - tipping point
+  - savannisation
+  - UTAC
+  - CREP
+  - GenesisAeon
+  - forest resilience
+  - critical slowing down
+authors:
+  - name: "MOR Research Collective / GenesisAeon"
+    email: "genesisaeon@example.org"
+references:
+  - type: article
+    title: "Amazon tipping point: Last chance for action"
+    authors:
+      - family-names: Lovejoy
+        given-names: Thomas E.
+      - family-names: Nobre
+        given-names: Carlos A.
+    journal: "Science Advances"
+    volume: 5
+    issue: 12
+    year: 2019
+    doi: "10.1126/sciadv.aba2949"
+  - type: article
+    title: "Pronounced loss of Amazon rainforest resilience since the early 2000s"
+    authors:
+      - family-names: Boulton
+        given-names: Chris A.
+      - family-names: Lenton
+        given-names: Timothy M.
+      - family-names: Boers
+        given-names: Niklas
+    journal: "Nature Climate Change"
+    volume: 12
+    pages: "271-278"
+    year: 2022
+    doi: "10.1038/s41558-022-01287-8"
+  - type: software
+    title: "Boulton et al. 2022 — Resilience dataset"
+    doi: "10.5281/zenodo.5831935"
