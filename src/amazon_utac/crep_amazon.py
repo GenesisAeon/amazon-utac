@@ -11,7 +11,7 @@ P  Permutation   Permutation entropy of forest-cover time series (inverted)
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, cast
 
 import numpy as np
 
@@ -101,7 +101,7 @@ class AmazonCREP:
         gives E ≈ 0.25, contributing to Γ ≈ 0.116.
         """
         synergy = np.asarray(deforestation_fraction) * np.asarray(drought_anomaly)
-        return np.tanh(synergy / 0.50).astype(float)  # scale: synergy=0.50 → E≈0.76; 0.12→E≈0.24
+        return cast(np.ndarray, np.tanh(synergy / 0.50))  # scale: synergy=0.50 → E≈0.76; 0.12→E≈0.24
 
     def component_P(
         self,

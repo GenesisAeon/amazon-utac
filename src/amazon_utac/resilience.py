@@ -8,6 +8,8 @@ Nature Climate Change 12, 271-278. DOI: 10.1038/s41558-022-01287-8
 
 from __future__ import annotations
 
+from typing import cast
+
 import numpy as np
 
 from .constants import AR1_CRITICAL_THRESHOLD, AR1_TREND_WINDOW_YEARS, SEED
@@ -146,7 +148,7 @@ class ResilienceLossTracker:
             Array aligned with ``rolling_ar1`` output (length n − window + 1).
         """
         _, ar1 = self.rolling_ar1(years, cover)
-        return np.clip(ar1, 0.0, 1.0).astype(float)
+        return cast(np.ndarray, np.clip(ar1, 0.0, 1.0))
 
     # ── Synthetic Boulton-like series ────────────────────────────────────────
 
