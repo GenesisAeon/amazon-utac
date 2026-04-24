@@ -101,7 +101,8 @@ class AmazonCREP:
         gives E ≈ 0.25, contributing to Γ ≈ 0.116.
         """
         synergy = np.asarray(deforestation_fraction) * np.asarray(drought_anomaly)
-        return cast(np.ndarray, np.tanh(synergy / 0.50))  # scale: synergy=0.50 → E≈0.76; 0.12→E≈0.24
+        # scale: synergy=0.50 → E≈0.76; 0.12 → E≈0.24
+        return cast(np.ndarray, np.tanh(synergy / 0.50))
 
     def component_P(
         self,
