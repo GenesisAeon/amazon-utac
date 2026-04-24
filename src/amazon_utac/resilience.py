@@ -171,6 +171,7 @@ class ResilienceLossTracker:
         cover = np.empty(n_years)
         cover[0] = 0.84
         phi_base = 0.55
+        mu = 0.84  # mean-reversion level, drifts slowly downward
         for i in range(1, n_years):
             # AR(1) parameter increases after 2000 (resilience loss)
             year = start_year + i
@@ -178,8 +179,9 @@ class ResilienceLossTracker:
             phi = min(phi, 0.97)
             noise = self.rng.normal(0, 0.005)
             drift = -0.001 - max(0.0, (year - 2000) * 0.0003)  # accelerating loss
-            cover[i] = phi * (cover[i - 1] - cover[i - 1].mean()) + cover[i - 1].mean()
-            cover[i] += drift + noise
+            mu = max(0.0, mu + drift)
+            # Mean-reverting AR(1): cover[i] = mu + phi*(cover[i-1] - mu) + noise
+            cover[i] = mu + phi * (cover[i - 1] - mu) + noise
             cover[i] = np.clip(cover[i], 0.0, 1.0)
 
         _, ar1 = self.rolling_ar1(years, cover)

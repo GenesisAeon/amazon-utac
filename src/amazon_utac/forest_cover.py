@@ -43,14 +43,16 @@ class ForestCoverLoader:
     def years(self) -> np.ndarray:
         if self._years is None:
             self._generate()
-        return self._years  # type: ignore[return-value]
+        assert self._years is not None
+        return self._years
 
     @property
     def cover(self) -> np.ndarray:
         """Normalised forest cover H(t) ∈ [0, 1]."""
         if self._cover is None:
             self._generate()
-        return self._cover  # type: ignore[return-value]
+        assert self._cover is not None
+        return self._cover
 
     def forest_fraction(self) -> np.ndarray:
         """Alias for ``cover`` — normalised forest cover H(t)."""

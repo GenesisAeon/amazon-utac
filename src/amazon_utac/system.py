@@ -23,21 +23,21 @@ Ethics-Gate Light (Phase H) runs inside run_cycle() and to_zenodo_record().
 
 from __future__ import annotations
 
-from datetime import UTC, datetime
+from datetime import datetime, timezone
 from typing import Any
 
 import numpy as np
 
 # ── genesis-os imports (stub if not installed) ───────────────────────────────
 try:
-    import genesis  # type: ignore[import]  # noqa: F401
+    import genesis  # noqa: F401
 
     GENESIS_AVAILABLE = True
 except ImportError:
     GENESIS_AVAILABLE = False
 
 try:
-    from scipy.integrate import solve_ivp  # type: ignore[import]
+    from scipy.integrate import solve_ivp
 
     SCIPY_AVAILABLE = True
 except ImportError:
@@ -111,11 +111,11 @@ class AmazonUTAC:
 
         # State caches
         self._cycle_result: dict[str, Any] | None = None
-        self._phase_events: list[dict] = []
+        self._phase_events: list[dict[str, Any]] = []
 
     # ── Diamond Interface ────────────────────────────────────────────────────
 
-    def run_cycle(self, duration_years: int = 80) -> dict:
+    def run_cycle(self, duration_years: int = 80) -> dict[str, Any]:
         """
         Run a full UTAC simulation cycle over ``duration_years``.
 
@@ -179,13 +179,26 @@ class AmazonUTAC:
         if not ethics_result["allowed"]:
             raise RuntimeError(f"EthicsGate blocked: {ethics_result['reason']}")
 
+        H_final = float(H_sim[-1])
+        utac_state_sim: dict[str, Any] = {
+            "H": H_final,
+            "dH_dt": float(dH_sim[-1]),
+            "H_star_forest": H_FOREST_ATTRACTOR,
+            "H_star_savanna": H_SAVANNA_ATTRACTOR,
+            "H_saddle_effective": self._landscape.effective_saddle(gamma_current),
+            "K_eff": 1.0,
+            "Gamma": float(gamma_current),
+            "in_forest_basin": self._landscape.is_in_forest_basin(H_final, gamma_current),
+            "barrier_height": self._landscape.barrier_height(gamma_current),
+        }
+
         result: dict[str, Any] = {
             "years": sim_years,
             "H": H_sim,
             "dH_dt": dH_sim,
             "Gamma": gamma_current,
             "crep_state": crep_state,
-            "utac_state": self.get_utac_state(),
+            "utac_state": utac_state_sim,
             "phase_events": list(self._phase_events),
             "tipping_year": tipping_year,
             "deforestation_scenario": self.deforestation_scenario,
@@ -194,7 +207,7 @@ class AmazonUTAC:
         self._cycle_result = result
         return result
 
-    def get_crep_state(self) -> dict:
+    def get_crep_state(self) -> dict[str, Any]:
         """
         Return current CREP tensor state {C, R, E, P, Gamma}.
 
@@ -202,7 +215,7 @@ class AmazonUTAC:
         Otherwise, computes from the historical record.
         """
         if self._cycle_result is not None:
-            return self._cycle_result["crep_state"]
+            return dict(self._cycle_result["crep_state"])
 
         years_hist = self._forest.years
         cover_hist = self._forest.cover
@@ -212,7 +225,7 @@ class AmazonUTAC:
         drought_anom = max(0.0, (dry_months[-1] - 3.5) / 1.5)
         return self._crep.compute_state(cover_hist, dry_months, defor_frac, drought_anom)
 
-    def get_utac_state(self) -> dict:
+    def get_utac_state(self) -> dict[str, Any]:
         """
         Return current UTAC state {H, dH_dt, H_star, K_eff}.
 
@@ -238,7 +251,7 @@ class AmazonUTAC:
             "barrier_height": self._landscape.barrier_height(gamma),
         }
 
-    def get_phase_events(self) -> list:
+    def get_phase_events(self) -> list[dict[str, Any]]:
         """
         Return list of detected phase transition events.
 
@@ -247,7 +260,7 @@ class AmazonUTAC:
         """
         return list(self._phase_events)
 
-    def to_zenodo_record(self) -> dict:
+    def to_zenodo_record(self) -> dict[str, Any]:
         """
         Export a Zenodo-compatible metadata record.
 
@@ -313,7 +326,7 @@ class AmazonUTAC:
                     "10.1126/sciadv.aba2949",  # Lovejoy & Nobre 2019
                     "10.1038/s41558-022-01287-8",  # Boulton et al. 2022
                 ],
-                "created": datetime.now(UTC).isoformat(),
+                "created": datetime.now(timezone.utc).isoformat(),
             },
             "crep_state": crep,
             "utac_state": utac,
@@ -374,7 +387,7 @@ class AmazonUTAC:
             annual_rate_fraction=deforestation_rate,
         )
 
-    def predict_tipping_year(self) -> dict:
+    def predict_tipping_year(self) -> dict[str, Any]:
         """
         UTAC-based tipping year prediction.
 
@@ -416,18 +429,21 @@ class AmazonUTAC:
         dH_sim = np.empty(n)
         H_sim[0] = H0
 
-        # Gamma increases with cumulative deforestation
-        defor_cumulative = CURRENT_DEFORESTATION_FRACTION
+        # Precompute cumulative deforestation at each year for use inside ODE
+        cumulative_defor = CURRENT_DEFORESTATION_FRACTION + np.concatenate(
+            [[0.0], np.cumsum(proj_rates[:-1])]
+        )
 
         if SCIPY_AVAILABLE:
             # Use scipy for accurate integration
             def _ode(t: float, y: list[float]) -> list[float]:
                 H = y[0]
-                # Gamma grows as deforestation accumulates
-                gamma = gamma0 + 0.5 * max(0.0, defor_cumulative - CURRENT_DEFORESTATION_FRACTION)
-                dH = self._landscape.ode(t, H, gamma)
-                # Add deforestation forcing
                 rate_idx = min(int(t), n - 1)
+                # Gamma grows as deforestation accumulates (updated each step)
+                gamma = gamma0 + 0.5 * max(
+                    0.0, cumulative_defor[rate_idx] - CURRENT_DEFORESTATION_FRACTION
+                )
+                dH = self._landscape.ode(t, H, gamma)
                 dH -= proj_rates[rate_idx] * H
                 return [dH]
 
@@ -454,11 +470,12 @@ class AmazonUTAC:
         else:
             # Euler fallback
             for i in range(1, n):
-                gamma_i = gamma0 + 0.3 * defor_cumulative
+                gamma_i = gamma0 + 0.5 * max(
+                    0.0, cumulative_defor[i - 1] - CURRENT_DEFORESTATION_FRACTION
+                )
                 dH = self._landscape.ode(0.0, H_sim[i - 1], gamma_i)
                 dH -= proj_rates[i] * H_sim[i - 1]
                 H_sim[i] = max(0.0, min(1.0, H_sim[i - 1] + dH))
-                defor_cumulative = min(1.0, defor_cumulative + proj_rates[i])
 
         # Compute dH/dt as finite differences
         dH_sim = np.gradient(H_sim, proj_years - proj_years[0])

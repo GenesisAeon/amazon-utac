@@ -142,7 +142,7 @@ class RainfallIndex:
         delta = dry_months - DRY_SEASON_BASELINE_MONTHS
         return 1.0 / (1.0 + np.exp(-delta))
 
-    def summary(self, n_years: int = 45, start_year: int = 1979) -> dict:
+    def summary(self, n_years: int = 45, start_year: int = 1979) -> dict[str, object]:
         """Return a summary dict of key rainfall diagnostics."""
         trend = self.dry_season_trend(n_years, start_year)
         _, dry_months = self.dry_season_length(n_years, start_year)

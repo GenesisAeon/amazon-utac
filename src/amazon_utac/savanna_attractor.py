@@ -61,7 +61,7 @@ class DualAttractorLandscape:
         At the tipping point, H_saddle = H_f → bifurcation.
         """
         shift = (self.H_f - self.H_saddle0) * np.tanh(self.sigma * gamma)
-        return self.H_saddle0 + shift
+        return float(self.H_saddle0 + shift)
 
     def tipping_gamma(self) -> float:
         """

@@ -11,6 +11,8 @@ P  Permutation   Permutation entropy of forest-cover time series (inverted)
 
 from __future__ import annotations
 
+from typing import Any
+
 import numpy as np
 
 from .constants import (
@@ -209,7 +211,7 @@ class AmazonCREP:
 
     # ── Calibrated reference state ───────────────────────────────────────────
 
-    def calibrated_gamma(self) -> dict[str, float]:
+    def calibrated_gamma(self) -> dict[str, Any]:
         """
         Return the analytically calibrated CREP state for the Amazon.
 

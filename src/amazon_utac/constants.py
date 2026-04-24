@@ -1,6 +1,7 @@
 """Physical and model constants for amazon-utac (GenesisAeon Package 19)."""
 
 import math
+from typing import Any
 
 # ── CREP / UTAC core ────────────────────────────────────────────────────────
 CREP_SIGMA: float = 2.2          # GenesisAeon standard coupling constant
@@ -58,7 +59,7 @@ PRODES_ORIGINAL_AREA_KM2: float = 4_153_741.0  # original Amazon area [km²]
 PRODES_DEFORESTED_2024_KM2: float = 664_450.0  # cumulative deforested [km²]
 
 # ── Benchmark targets ───────────────────────────────────────────────────────
-AMAZON_TARGETS: dict = {
+AMAZON_TARGETS: dict[str, Any] = {
     "deforestation_threshold_pct": (22.5, 0.10),   # Lovejoy & Nobre midpoint
     "current_deforestation_pct":   (16.0, 0.10),   # as of 2024
     "gamma_amazon":                (0.116, 0.05),
@@ -67,7 +68,7 @@ AMAZON_TARGETS: dict = {
 }
 
 # ── GenesisAeon package registry entry ────────────────────────────────────
-PACKAGE_REGISTRY_ENTRY: dict = {
+PACKAGE_REGISTRY_ENTRY: dict[str, Any] = {
     "name": "amazon-utac",
     "class": "AmazonUTAC",
     "domain": "ecology",

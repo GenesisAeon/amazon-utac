@@ -9,6 +9,8 @@ Primary references:
 
 from __future__ import annotations
 
+from typing import Any
+
 from .constants import (
     AMAZON_TARGETS,
     CURRENT_DEFORESTATION_FRACTION,
@@ -53,7 +55,7 @@ def _check_numeric(
     return BenchmarkResult(name, target, actual, rel_tolerance, passed, note)
 
 
-def run_benchmarks(utac_state: dict | None = None) -> list[BenchmarkResult]:
+def run_benchmarks(utac_state: dict[str, Any] | None = None) -> list[BenchmarkResult]:
     """
     Validate amazon-utac against AMAZON_TARGETS.
 

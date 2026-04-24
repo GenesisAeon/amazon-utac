@@ -15,7 +15,8 @@ full ethical review but catches the most common failure modes.
 from __future__ import annotations
 
 from dataclasses import dataclass, field
-from datetime import UTC, datetime
+from datetime import datetime, timezone
+from typing import Any
 
 
 @dataclass
@@ -90,7 +91,7 @@ class EthicsCheckResult:
     reason: str
     warnings: list[str] = field(default_factory=list)
     timestamp: str = field(
-        default_factory=lambda: datetime.now(UTC).isoformat()
+        default_factory=lambda: datetime.now(timezone.utc).isoformat()
     )
 
 
@@ -114,7 +115,7 @@ class EthicsGate:
     def __init__(self, config: EthicsGateConfig | None = None) -> None:
         self.config = config or EthicsGateConfig()
 
-    def check(self, state: dict, tension: float = 0.0) -> dict:
+    def check(self, state: dict[str, Any], tension: float = 0.0) -> dict[str, Any]:
         """
         Run all Ethics-Gate Light checks on a model state dict.
 
