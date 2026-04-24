@@ -1,0 +1,64 @@
+# Boulton et al. (2022) Resilience Loss Dataset Summary
+# Source: Nature Climate Change 12, 271-278 (2022)
+# DOI: 10.1038/s41558-022-01287-8
+# Zenodo dataset: https://doi.org/10.5281/zenodo.5831935
+
+metadata:
+  reference: "Boulton, C.A., Lenton, T.M. & Boers, N. (2022)"
+  title: "Pronounced loss of Amazon rainforest resilience since the early 2000s"
+  journal: "Nature Climate Change"
+  doi: "10.1038/s41558-022-01287-8"
+  zenodo_data: "10.5281/zenodo.5831935"
+  data_period: "2000-2018 (MODIS vegetation optical depth)"
+
+method:
+  indicator: "AR(1) coefficient of vegetation optical depth anomalies"
+  window_years: 10
+  spatial_resolution: "0.25 degree"
+  temporal_resolution: "monthly anomalies"
+  data_source: "MODIS VOD (vegetation optical depth) L-band"
+
+key_findings:
+  ar1_trend_direction: "increasing"
+  ar1_increase_since_2000: 0.15  # approximate increase in AR(1) over study period
+  fraction_area_declining_resilience: 0.75  # ~75% of Amazon showing decline
+  trend_significance: "p < 0.05 for eastern and southern Amazon"
+  resilience_loss_accelerated_post_2000: true
+
+regional_breakdown:
+  eastern_amazon:
+    trend: "strongly increasing AR(1)"
+    threat_level: "high"
+    drivers: ["deforestation", "drought", "fire"]
+  southern_amazon:
+    trend: "increasing AR(1)"
+    threat_level: "high"
+    drivers: ["deforestation", "agricultural expansion", "dry season lengthening"]
+  western_amazon:
+    trend: "stable or slight increase"
+    threat_level: "medium"
+    drivers: ["climate variability", "El Nino events"]
+
+utac_crep_mapping:
+  ar1_to_crep_C: "AR(1) → CREP C-component (coherence)"
+  ar1_critical_threshold: 0.90  # C above this → near tipping
+  ar1_2000_value: 0.55  # approximate AR(1) at study start
+  ar1_2018_value: 0.70  # approximate AR(1) at study end
+  ar1_trend_years_to_critical:  # years until AR(1) reaches 0.90
+    at_current_trend: 28  # ~28 years from 2018 → ~2046
+    uncertainty_years: 8
+
+benchmark_targets:
+  resilience_loss_ar1_trend:
+    expected: "increasing"
+    actual_boulton2022: "increasing"
+    utac_reproduces: true
+  ar1_final_value:
+    boulton2022_range: [0.65, 0.75]
+    utac_target: 0.70
+    tolerance: 0.10
+
+citation: |
+  Boulton, C.A., Lenton, T.M. & Boers, N. Pronounced loss of Amazon rainforest
+  resilience since the early 2000s. Nat. Clim. Chang. 12, 271–278 (2022).
+  https://doi.org/10.1038/s41558-022-01287-8

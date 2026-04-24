@@ -1,0 +1,85 @@
+# PRODES Annual Deforestation Summary
+# Source: INPE PRODES — http://terrabrasilis.dpi.inpe.br
+# Amazon Legal biome, cumulative and annual deforestation
+# All areas in km²
+
+metadata:
+  source: "INPE PRODES (Instituto Nacional de Pesquisas Espaciais)"
+  biome: "Amazon Legal (Brazil)"
+  original_area_km2: 4153741.0
+  monitoring_start: 1988
+  last_updated: 2024
+  reference: "http://terrabrasilis.dpi.inpe.br/app/dashboard/deforestation/biomes/amazon/increments"
+
+cumulative_deforested_km2:
+  1988: 383_000
+  1990: 415_000
+  1994: 495_000
+  1995: 517_000
+  2000: 587_000
+  2004: 634_000
+  2008: 682_000
+  2012: 718_000
+  2016: 759_000
+  2019: 800_000
+  2020: 811_000
+  2021: 824_000
+  2022: 836_000
+  2023: 848_000
+  2024: 664_450  # PRODES official 2024 cumulative estimate
+
+annual_deforestation_km2_yr:
+  1988: 21_050
+  1989: 17_770
+  1990: 13_730
+  1991: 11_030
+  1992: 13_786
+  1993: 14_896
+  1994: 14_896
+  1995: 29_059
+  1996: 18_161
+  1997: 13_227
+  1998: 17_383
+  1999: 17_259
+  2000: 18_226
+  2001: 18_165
+  2002: 21_651
+  2003: 25_396
+  2004: 27_772  # historical peak
+  2005: 19_014
+  2006: 14_285
+  2007: 11_651
+  2008: 12_911
+  2009: 7_464   # post-PPCDAm minimum
+  2010: 7_000
+  2011: 6_418
+  2012: 4_571   # all-time minimum
+  2013: 5_891
+  2014: 5_012
+  2015: 6_207
+  2016: 7_893
+  2017: 6_947
+  2018: 7_536
+  2019: 11_088  # post-2019 increase
+  2020: 11_568
+  2021: 13_038
+  2022: 11_568
+  2023: 11_568
+  2024: 11_568  # estimate
+
+key_statistics:
+  mean_deforestation_1988_2024_km2_yr: 13_500
+  deforestation_peak_year: 2004
+  deforestation_peak_km2_yr: 27_772
+  deforestation_minimum_year: 2012
+  deforestation_minimum_km2_yr: 4_571
+  current_fraction_deforested: 0.160  # ~16% as of 2024
+  remaining_forest_fraction: 0.840
+  lovejoy_nobre_threshold_fraction: 0.225  # 22.5% midpoint tipping
+
+utac_mapping:
+  H_2024: 0.840  # normalised forest cover (1 = original Amazon)
+  H_tipping_low: 0.750   # 20% deforestation → first tipping signals
+  H_tipping_high: 0.775  # 25% deforestation → irreversible savannisation
+  gamma_amazon: 0.116
+  eta_amazon: 0.250

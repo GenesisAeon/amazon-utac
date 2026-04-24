@@ -1,27 +1,31 @@
 [project]
 name = "diamond-setup"
 version = "1.0.0"
-description = "Universal Python project scaffold â€” generate professional project skeletons in seconds"
+description = "Universal Python project scaffold - generate professional project skeletons in seconds. Includes GenesisAeon Package 19: amazon-utac."
 readme = "README.md"
 license = { text = "MIT" }
-authors = [{ name = "GenesisAeon" }]
-requires-python = ">=3.11"
-keywords = ["scaffold", "template", "cli", "project-generator", "skeleton"]
+authors = [{ name = "GenesisAeon / MOR Research Collective" }]
+requires-python = ">=3.10"
+keywords = ["scaffold", "template", "cli", "project-generator", "skeleton", "amazon", "utac", "crep", "tipping-point"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
     "Environment :: Console",
     "Intended Audience :: Developers",
+    "Intended Audience :: Science/Research",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Topic :: Software Development :: Code Generators",
+    "Topic :: Scientific/Engineering",
 ]
 dependencies = [
     "typer>=0.12.0",
     "rich>=13.7.0",
     "pyyaml>=6.0",
     "pydantic>=2.7",
+    "numpy>=1.26",
+    "scipy>=1.12",
 ]
 
 [project.optional-dependencies]
@@ -36,47 +40,55 @@ dev = [
     "pytest>=8.0.0",
     "pytest-cov>=5.0.0",
 ]
+notebooks = [
+    "jupyter>=1.0",
+    "matplotlib>=3.8",
+    "ipykernel>=6.0",
+]
 
 [project.scripts]
 diamond = "diamond_setup.cli:app"
 
 [project.urls]
-Homepage = "https://github.com/GenesisAeon/diamond-setup"
-Repository = "https://github.com/GenesisAeon/diamond-setup"
-Documentation = "https://genesisaeon.github.io/diamond-setup"
-Issues = "https://github.com/GenesisAeon/diamond-setup/issues"
-Zenodo = "https://doi.org/10.5281/zenodo.XXXXXXX"
+Homepage = "https://github.com/GenesisAeon/amazon-utac"
+Repository = "https://github.com/GenesisAeon/amazon-utac"
+Documentation = "https://genesisaeon.github.io/amazon-utac"
+Issues = "https://github.com/GenesisAeon/amazon-utac/issues"
+Zenodo = "https://doi.org/10.5281/zenodo.19645351"
 
 [build-system]
 requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/diamond_setup"]
+packages = ["src/diamond_setup", "src/amazon_utac"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py311"
+target-version = "py310"
 
 [tool.ruff.lint]
 select = ["E", "F", "B", "I", "W", "UP", "C4", "SIM"]
-ignore = ["B008"]  # typer uses function calls in defaults
+ignore = ["B008"]
 
 [tool.ruff.lint.per-file-ignores]
-"tests/**" = ["S101"]  # allow assert in tests
+"tests/**" = ["S101"]
 
 [tool.pytest.ini_options]
 testpaths = ["tests"]
-addopts = "--cov=diamond_setup --cov-report=term-missing -v"
+addopts = "--cov=diamond_setup --cov=amazon_utac --cov-report=term-missing -v"
 
 [tool.coverage.run]
 source = ["src"]
 omit = ["tests/*"]
 
 [tool.mypy]
-python_version = "3.11"
+python_version = "3.10"
 strict = true
 warn_return_any = true
 warn_unused_configs = true
 ignore_missing_imports = true
 
+[[tool.mypy.overrides]]
+module = "diamond_setup.cli"
+disallow_untyped_decorators = false
