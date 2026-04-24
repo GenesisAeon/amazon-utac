@@ -146,7 +146,7 @@ class ResilienceLossTracker:
             Array aligned with ``rolling_ar1`` output (length n − window + 1).
         """
         _, ar1 = self.rolling_ar1(years, cover)
-        return np.clip(ar1, 0.0, 1.0)
+        return np.clip(ar1, 0.0, 1.0).astype(float)
 
     # ── Synthetic Boulton-like series ────────────────────────────────────────
 
