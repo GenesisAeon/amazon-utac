@@ -1,0 +1,33 @@
+{
+  "title": "amazon-utac v0.1.0: UTAC Analysis of Amazon Rainforest Resilience and Tipping Dynamics",
+  "version": "0.1.0",
+  "upload_type": "software",
+  "access_right": "open",
+  "language": "eng",
+  "creators": [
+    {
+      "name": "Römer, Johann",
+      "affiliation": "GenesisAeon (Independent Researcher)"
+    }
+  ],
+  "description": "amazon-utac v0.1.0 applies UTAC (Universal Threshold Activation Criticality) to Amazon rainforest vegetation resilience indicators, deforestation time series, and precipitation–evapotranspiration feedbacks. The UTAC-Logistic ODE detects self-organized critical thresholds in ecosystem resilience loss, providing early-warning signals of potential savannification tipping. CREP metrics measure coherence and emergence in biome-scale feedback dynamics. Part of the GenesisAeon UTAC application suite (genesis-os). Dual-licensed: GPLv3-or-later (code) + CC BY 4.0 (documentation).",
+  "keywords": [
+    "genesis-aeon", "utac", "crep", "criticality", "self-organized-criticality",
+    "mirror-machine", "fractal", "amazon", "rainforest", "tipping-point",
+    "deforestation", "ecosystem-resilience", "emergence"
+  ],
+  "license": "GPL-3.0-or-later",
+  "related_identifiers": [
+    {
+      "identifier": "https://doi.org/10.5281/zenodo.19645351",
+      "relation": "isPartOf",
+      "scheme": "doi",
+      "resource_type": "publication-article"
+    },
+    {
+      "identifier": "https://github.com/GenesisAeon/amazon-utac",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
+}
