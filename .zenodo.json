@@ -1,33 +1,34 @@
 {
-  "title": "amazon-utac v0.1.0: UTAC Analysis of Amazon Rainforest Resilience and Tipping Dynamics",
-  "version": "0.1.0",
-  "upload_type": "software",
-  "access_right": "open",
-  "language": "eng",
+  "title": "amazon-utac — P19: GenesisAeon Package 19 — Amazon Rainforest Savannisation as a UTAC System",
+  "description": "<p>UTAC dynamical model of the Amazon rainforest savannisation tipping point, calibrated against Lovejoy &amp; Nobre (2019) and Boulton et al. (2022). Reports Γ_Amazon ≈ 0.116 (LOW-CREP, fragile regime).</p><p>Part of the <strong>GenesisAeon</strong> ecosystem (P19, domain: ecology / rainforest savannisation). Within the GenesisAeon CREP Criticality Spectrum, this package's characteristic coupling value is Γ ≈ 0.116.</p><p>See <a href=\"https://github.com/GenesisAeon/amazon-utac\">github.com/GenesisAeon/amazon-utac</a> for source, documentation, and reproducibility notebooks.</p>",
   "creators": [
     {
       "name": "Römer, Johann",
-      "affiliation": "GenesisAeon (Independent Researcher)"
+      "affiliation": "Independent Researcher / MOR Research Collective"
     }
   ],
-  "description": "amazon-utac v0.1.0 applies UTAC (Universal Threshold Activation Criticality) to Amazon rainforest vegetation resilience indicators, deforestation time series, and precipitation–evapotranspiration feedbacks. The UTAC-Logistic ODE detects self-organized critical thresholds in ecosystem resilience loss, providing early-warning signals of potential savannification tipping. CREP metrics measure coherence and emergence in biome-scale feedback dynamics. Part of the GenesisAeon UTAC application suite (genesis-os). Dual-licensed: GPLv3-or-later (code) + CC BY 4.0 (documentation).",
+  "license": "MIT",
+  "upload_type": "software",
+  "access_right": "open",
   "keywords": [
-    "genesis-aeon", "utac", "crep", "criticality", "self-organized-criticality",
-    "mirror-machine", "fractal", "amazon", "rainforest", "tipping-point",
-    "deforestation", "ecosystem-resilience", "emergence"
+    "GenesisAeon",
+    "P19",
+    "ecology",
+    "rainforest savannisation",
+    "UTAC",
+    "CREP",
+    "open science"
   ],
-  "license": "GPL-3.0-or-later",
   "related_identifiers": [
     {
-      "identifier": "https://doi.org/10.5281/zenodo.19645351",
+      "identifier": "10.5281/zenodo.19645351",
       "relation": "isPartOf",
-      "scheme": "doi",
-      "resource_type": "publication-article"
-    },
-    {
-      "identifier": "https://github.com/GenesisAeon/amazon-utac",
-      "relation": "isSupplementTo",
-      "scheme": "url"
+      "resource_type": "publication-article",
+      "scheme": "doi"
     }
+  ],
+  "version": "1.0.0",
+  "communities": [
+    { "identifier": "genesisaeon" }
   ]
 }
