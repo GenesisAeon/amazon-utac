@@ -1,7 +1,7 @@
 [project]
-name = "diamond-setup"
+name = "amazon-utac"
 version = "1.0.0"
-description = "Universal Python project scaffold - generate professional project skeletons in seconds. Includes GenesisAeon Package 19: amazon-utac."
+description = "GenesisAeon Package 19: UTAC dynamical model of the Amazon rainforest savannisation tipping point. Bundles the diamond-setup project scaffold CLI."
 readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "GenesisAeon / MOR Research Collective" }]
