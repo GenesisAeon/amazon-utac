@@ -26,6 +26,7 @@ dependencies = [
     "pydantic>=2.7",
     "numpy>=1.26",
     "scipy>=1.12",
+    "diamond-setup>=2.2.0",
 ]
 
 [project.optional-dependencies]
@@ -61,7 +62,7 @@ requires = ["hatchling"]
 build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
-packages = ["src/diamond_setup", "src/amazon_utac"]
+packages = ["src/amazon_utac"]
 
 [tool.ruff]
 line-length = 100

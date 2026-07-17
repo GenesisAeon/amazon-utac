@@ -1,7 +1,6 @@
 """Tests for the preset engine."""
 
 import pytest
-
 from diamond_setup.preset import _build_context, _to_snake, scaffold
 from diamond_setup.templates import REGISTRY
 

@@ -2,10 +2,10 @@
 
 from pathlib import Path
 
-from typer.testing import CliRunner
-
+from diamond_setup import __version__
 from diamond_setup.cli import app
 from diamond_setup.templates import REGISTRY
+from typer.testing import CliRunner
 
 runner = CliRunner()
 
@@ -13,7 +13,7 @@ runner = CliRunner()
 def test_version():
     result = runner.invoke(app, ["version"])
     assert result.exit_code == 0
-    assert "1.0.0" in result.output
+    assert __version__ in result.output
 
 
 def test_list_templates():
