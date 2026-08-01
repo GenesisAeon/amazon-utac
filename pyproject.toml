@@ -1,11 +1,11 @@
 [project]
 name = "amazon-utac"
-version = "1.0.0"
+version = "1.1.0"
 description = "GenesisAeon Package 19: UTAC dynamical model of the Amazon rainforest savannisation tipping point. Bundles the diamond-setup project scaffold CLI."
 readme = "README.md"
 license = { text = "MIT" }
 authors = [{ name = "GenesisAeon / MOR Research Collective" }]
-requires-python = ">=3.10"
+requires-python = ">=3.11"
 keywords = ["scaffold", "template", "cli", "project-generator", "skeleton", "amazon", "utac", "crep", "tipping-point"]
 classifiers = [
     "Development Status :: 5 - Production/Stable",
@@ -66,7 +66,7 @@ packages = ["src/amazon_utac"]
 
 [tool.ruff]
 line-length = 100
-target-version = "py310"
+target-version = "py311"
 
 [tool.ruff.lint]
 select = ["E", "F", "B", "I", "W", "UP", "C4", "SIM"]
@@ -84,7 +84,7 @@ source = ["src"]
 omit = ["tests/*"]
 
 [tool.mypy]
-python_version = "3.10"
+python_version = "3.11"
 strict = true
 warn_return_any = true
 warn_unused_configs = true

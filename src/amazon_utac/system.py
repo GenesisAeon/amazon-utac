@@ -23,7 +23,7 @@ Ethics-Gate Light (Phase H) runs inside run_cycle() and to_zenodo_record().
 
 from __future__ import annotations
 
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from typing import Any
 
 import numpy as np
@@ -326,7 +326,7 @@ class AmazonUTAC:
                     "10.1126/sciadv.aba2949",  # Lovejoy & Nobre 2019
                     "10.1038/s41558-022-01287-8",  # Boulton et al. 2022
                 ],
-                "created": datetime.now(timezone.utc).isoformat(),
+                "created": datetime.now(UTC).isoformat(),
             },
             "crep_state": crep,
             "utac_state": utac,
