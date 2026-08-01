@@ -73,7 +73,7 @@ PACKAGE_REGISTRY_ENTRY: dict[str, Any] = {
     "class": "AmazonUTAC",
     "domain": "ecology",
     "scale": "continental",
-    "zenodo": "10.5281/zenodo.19645351",
+    "zenodo": "10.5281/zenodo.20746954",
     "reference": "10.1038/s41558-022-01287-8",
     "package_id": 19,
 }

@@ -55,7 +55,7 @@ Homepage = "https://github.com/GenesisAeon/amazon-utac"
 Repository = "https://github.com/GenesisAeon/amazon-utac"
 Documentation = "https://genesisaeon.github.io/amazon-utac"
 Issues = "https://github.com/GenesisAeon/amazon-utac/issues"
-Zenodo = "https://doi.org/10.5281/zenodo.19645351"
+Zenodo = "https://doi.org/10.5281/zenodo.20746954"
 
 [build-system]
 requires = ["hatchling"]

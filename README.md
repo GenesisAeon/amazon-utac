@@ -61,11 +61,11 @@ Criticality Spectrum.
 
 ## Citation
 
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.PLACEHOLDER.svg)](https://doi.org/10.5281/zenodo.PLACEHOLDER)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.20746954.svg)](https://doi.org/10.5281/zenodo.20746954)
 
-DOI will be assigned automatically on first GitHub Release once
-Zenodo–GitHub integration is enabled for this repo. Until then, please cite
-the GenesisAeon whitepaper DOI above, or `CITATION.cff` in this repository.
+Please cite this repository's own DOI above (or `CITATION.cff` in this
+repository), and the GenesisAeon whitepaper DOI further up for the
+overarching framework.
 
 ## License
 
